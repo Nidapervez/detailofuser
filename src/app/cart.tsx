@@ -122,7 +122,7 @@ export const Cart = () => {
                 >
                   Proceed to Checkout
                 </button>
-                <Link href='/'><button className="w-full bg-blue-600 text-white py-2 rounded-md">Back</button></Link>
+                <Link href='/'><button className="w-full bg-blue-600 text-white py-2 rounded-md mt-20">Back</button></Link>
               </div>
             )}
           </div>
