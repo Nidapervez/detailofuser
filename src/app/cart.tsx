@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "./context";
 import CheckoutForm from "./CheckoutForm";
+import Link from "next/link";
 
 interface OrderDetails {
   _id: string;
@@ -121,6 +122,7 @@ export const Cart = () => {
                 >
                   Proceed to Checkout
                 </button>
+                <Link href='/'><button className="w-full bg-blue-600 text-white py-2 rounded-md">Back</button></Link>
               </div>
             )}
           </div>
