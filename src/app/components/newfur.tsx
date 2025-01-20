@@ -57,16 +57,12 @@ const Newfur = async () => {
                       role="presentation"
                       aria-hidden="true"
                     />
-       <button
-                className="snipcart-add-item w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
-                data-item-id='65' // Use _id as the unique identifier
-                data-item-price="88"
-                data-item-description={bannerData.heading}
-                data-item-image={bannerData.imageUrl} // Corrected image field
-                data-item-name={bannerData.altText} // Corrected product name field
+       <Link href="/shoppingcart"> <button
+                className=" w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
+               
               >
-                Add to Cart
-              </button>
+                View more
+              </button></Link>
                   </div>
                 </div>
               </div>

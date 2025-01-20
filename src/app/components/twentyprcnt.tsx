@@ -45,16 +45,12 @@ const Twentyprcnt = () => {
                     />
                     <div className="basis-auto">Simple neutral colours.</div>
                   </div>
-                  <button
-                className="snipcart-add-item w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
-                data-item-id='65' // Use _id as the unique identifier
-                data-item-price="88"
-                data-item-description="BrownSofa"
-                data-item-image= "https://cdn.builder.io/api/v1/image/assets/TEMP/7a31c1943c6eb89e187a62682ba61cd1e34b7ed1c2a32b45c22555d405a8481a?placeholderIfAbsent=true&apiKey=63020574feac4f3895ec244f357db276"// Corrected image field
-                data-item-name="Sofa" // Corrected product name field
+                  <Link href="/shoppingcart"> <button
+                className=" w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
+               
               >
-                Add to Cart
-              </button>
+                View more
+              </button></Link>
                 </div>
               </div>
               <div className="flex flex-col ml-5 w-[55%] max-md:ml-0 max-md:w-full">

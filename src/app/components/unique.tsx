@@ -75,12 +75,12 @@ const Newfur = async () => {
               </div>
             </div>
             <div className="flex gap-5 mt-10 max-w-full w-[289px]">
-            <button
+            <Link href="/shoppingcart"> <button
                 className=" w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
                
               >
-                Add to Cart
-              </button>
+                View more
+              </button></Link>
               <div className="flex flex-col my-auto text-sm text-violet-950">
                 <div className="font-semibold tracking-wide">
                   B&amp;B Italian Sofa
