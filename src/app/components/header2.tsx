@@ -7,6 +7,9 @@ import {
   faUser,
   faHeart,
   faShoppingCart,
+  faTachometerAlt,
+  faCogs,
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Link from "next/link";
@@ -86,6 +89,19 @@ const Header1 = () => {
               <FontAwesomeIcon icon={faShoppingCart} className="mr-2" /> Cart
             </button>
           </Link>
+
+          <Link href='/dashboard'>
+  <button className="flex items-center snipcart-checkout">
+    <FontAwesomeIcon icon={faCogs} className="mr-2" /> Admin Dashboard
+  </button>
+</Link>
+
+
+<Link href='/analytics'>
+  <button className="flex items-center snipcart-checkout">
+    <FontAwesomeIcon icon={faChartLine} className="mr-2" /> Analytics
+  </button>
+</Link>
          
         </div>
       </div>
