@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Header1 from "./components/header2";
 import { CartProvider } from "./context";
 import { Toaster } from "react-hot-toast"; // Import Toaster
+import { WishlistProvider } from "./wishlistcontext";
 
 // Load custom fonts
 const geistSans = localFont({
@@ -42,14 +43,14 @@ export default function RootLayout({
       >
         {/* Toaster component added globally */}
         <Toaster position="top-left" reverseOrder={false} />
-
+<WishlistProvider>
         <CartProvider>
         
 
           <Header1 />
           <main>{children}</main>
           <Footer />
-        </CartProvider>
+        </CartProvider></WishlistProvider>
       </body>
     </html>
   );

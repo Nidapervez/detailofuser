@@ -5,21 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { useCart } from "@/app/context";
-import { Cart } from "../cart"; // Ensure the Cart component is correctly imported
-import { toast } from "react-hot-toast"; // Import toast
+import { useWishlist } from "@/app/wishlistcontext"; // Import Wishlist context
+import { Cart } from "../cart";
+import { toast } from "react-hot-toast";
+import { FaHeart } from "react-icons/fa"; // Import wishlist icon
 
 interface Product {
   _id: string;
   name: string;
   description: string;
-  price: string; // Updated to string to match the schema
+  price: string;
   discountPercentage?: number;
-  priceWithoutDiscount?: string; // Updated to string
+  priceWithoutDiscount?: string;
   rating: number;
   ratingCount: number;
   tags?: string[];
   sizes?: string[];
-  image: string; // Updated to string for image URL
+  image: string;
   stockLevel: number;
   category: string;
   isFeaturedProduct: boolean;
@@ -28,7 +30,8 @@ interface Product {
 const Page = () => {
   const [bags, setBags] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { add } = useCart(); // Access the add function from the cart context
+  const { add } = useCart();
+  const { addToWishlist } = useWishlist(); // Access addToWishlist from WishlistContext
 
   useEffect(() => {
     const fetchBags = async () => {
@@ -74,9 +77,6 @@ const Page = () => {
     <div className="container mx-auto mt-10 px-6">
       <h1 className="text-3xl font-semibold text-gray-800 mb-8">Product List</h1>
 
-      {/* Display the Cart component */}
-      
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {bags.map((bag) => (
           <div
@@ -86,7 +86,7 @@ const Page = () => {
             <div className="flex flex-col items-center p-4 flex-grow">
               <Link href={`/shoppingcart/${bag._id}`}>
                 <Image
-                  src={bag.image || "/placeholder.png"} // Handle the image URL
+                  src={bag.image || "/placeholder.png"}
                   alt={bag.name || "Product Image"}
                   width={300}
                   height={300}
@@ -96,10 +96,10 @@ const Page = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-2">{bag.name}</h2>
               <p className="text-sm text-gray-500 mb-2">{bag.description}</p>
               <p className="text-lg font-semibold text-gray-800">
-                ${parseFloat(bag.price).toFixed(2)} {/* Ensure price is parsed as a number */}
+                ${parseFloat(bag.price).toFixed(2)}
                 {bag.discountPercentage && (
                   <span className="ml-2 text-sm text-red-500 line-through">
-                    ${parseFloat(bag.priceWithoutDiscount || "0").toFixed(2)} {/* Handle discount price */}
+                    ${parseFloat(bag.priceWithoutDiscount || "0").toFixed(2)}
                   </span>
                 )}
               </p>
@@ -108,30 +108,45 @@ const Page = () => {
                 <span className="text-sm text-gray-500">{bag.ratingCount} reviews</span>
               </div>
               <div className="mt-2 text-sm text-gray-600">
-                Category: {bag.category} {/* Display category */}
+                Category: {bag.category}
               </div>
               <div className="mt-1 text-sm text-gray-600">
-                Stock Level: {bag.stockLevel} {/* Display stock level */}
+                Stock Level: {bag.stockLevel}
               </div>
             </div>
+
+            {/* Wishlist Icon */}
+            <button
+              onClick={() => {
+                addToWishlist({
+                  id: bag._id,
+                  name: bag.name,
+                  price: parseFloat(bag.price),
+                  image: bag.image || "/placeholder.png",
+                });
+                toast.success(`${bag.name} added to wishlist!`);
+              }}
+              className="absolute top-4 right-4 text-pink-600 hover:text-pink-800 transition duration-300"
+            >
+              <FaHeart size={24} />
+            </button>
+
             {/* Add to Cart Button */}
             <button
               onClick={() => {
                 add({
                   id: bag._id,
                   name: bag.name,
-                  price: parseFloat(bag.price), // Ensure price is passed as a number
+                  price: parseFloat(bag.price),
                   quantity: 1,
-                  image: bag.image || "/placeholder.png", // Include image in cart
+                  image: bag.image || "/placeholder.png",
                 });
-                toast.success(`${bag.name} added to cart!`); // Show toast when item is added
+                toast.success(`${bag.name} added to cart!`);
               }}
               className="mt-4 px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
             >
               Add to Cart
             </button>
-
-         
           </div>
         ))}
       </div>
