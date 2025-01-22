@@ -1,10 +1,14 @@
-"use client"
-import React from 'react'
-import { Cart } from '../cart'
+"use client";
+import React from "react";
+import { Cart } from "../cart";
+import { Toaster } from "react-hot-toast";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center py-8">
+      {/* Toaster for Notifications */}
+      <Toaster position="top-left" reverseOrder={false} />
+
       {/* Heading Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Welcome to Your Cart</h1>
@@ -22,7 +26,7 @@ const page = () => {
         <p>&copy; 2025 Your E-Commerce Store. All rights reserved.</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page;
+export default Page;

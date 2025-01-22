@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "./components/footer";
 import Header1 from "./components/header2";
-import { CartProvider} from "./context";
+import { CartProvider } from "./context";
+import { Toaster } from "react-hot-toast"; // Import Toaster
 
 // Load custom fonts
 const geistSans = localFont({
@@ -39,11 +40,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
-          <CartProvider>
-      <Header1 />
-      <main>{children}</main>
-      <Footer />
-    </CartProvider>
+        {/* Toaster component added globally */}
+        <Toaster position="top-left" reverseOrder={false} />
+
+        <CartProvider>
+        
+
+          <Header1 />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

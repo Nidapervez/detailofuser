@@ -1,35 +1,22 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { useCart } from "./context";
 import CheckoutForm from "./CheckoutForm";
 import Link from "next/link";
-
-interface OrderDetails {
-  _id: string;
-  name: string;
-  email: string;
-  address: string;
-  cartItems: Array<{
-    id: string;
-    name: string;
-    quantity: number;
-    price: number;
-  }>;
-}
+import { toast } from "react-hot-toast";
 
 export const Cart = () => {
-  const { cart, increaseQuantity, decreaseQuantity, deleteItem } = useCart();
+  const { cart, increaseQuantity, decreaseQuantity, deleteItem, clearCart } = useCart();
   const [isCartVisible, setIsCartVisible] = useState<boolean>(false);
-  const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false); // Track checkout form visibility
-  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null); // New state for order details
-  const [isMobile, setIsMobile] = useState<boolean>(false); // Track if the screen is mobile
+  const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // Detect screen size for mobile view
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust this width as needed for mobile
+      setIsMobile(window.innerWidth <= 768);
     };
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -51,12 +38,15 @@ export const Cart = () => {
   }, [cart.items.length]);
 
   const handleCheckoutClick = () => {
-    setIsCheckoutVisible(true); // Show checkout form
+    setIsCheckoutVisible(true);
   };
+
+  // Calculate total quantity and price
+  const totalQuantity = cart.items.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cart.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
     <>
-      {/* Cart Sidebar for Desktop */}
       {!isMobile && (
         <div
           className="fixed right-0 w-full sm:w-96 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out"
@@ -91,19 +81,32 @@ export const Cart = () => {
                     <div className="inline-block space-x-2">
                       <button
                         className="bg-green-600 text-white px-2 py-1 rounded-md text-sm sm:text-base"
-                        onClick={() => increaseQuantity(val.id)}
+                        onClick={() => {
+                          increaseQuantity(val.id);
+                          toast.success(`Increased quantity of ${val.name}`);
+                        }}
                       >
                         +
                       </button>
                       <button
                         className="bg-red-600 text-white px-2 py-1 rounded-md text-sm sm:text-base"
-                        onClick={() => decreaseQuantity(val.id)}
+                        onClick={() => {
+                          if (val.quantity > 1) {
+                            decreaseQuantity(val.id);
+                            toast.success(`Decreased quantity of ${val.name}`);
+                          } else {
+                            toast.error(`Cannot decrease below 1`);
+                          }
+                        }}
                       >
                         -
                       </button>
                       <button
                         className="bg-gray-600 text-white px-2 py-1 rounded-md text-sm sm:text-base"
-                        onClick={() => deleteItem(val.id)}
+                        onClick={() => {
+                          deleteItem(val.id);
+                          toast.success(`Removed ${val.name} from the cart`);
+                        }}
                       >
                         Remove
                       </button>
@@ -116,20 +119,39 @@ export const Cart = () => {
             </ol>
             {cart.items.length > 0 && (
               <div className="mt-4">
+                <div className="mb-4">
+                  <p className="text-black font-semibold">
+                    Total Quantity: {totalQuantity}
+                  </p>
+                  <p className="text-black font-semibold">
+                    Total Price: ${totalPrice.toFixed(2)}
+                  </p>
+                </div>
                 <button
                   onClick={handleCheckoutClick}
                   className="w-full bg-blue-600 text-white py-2 rounded-md"
                 >
                   Proceed to Checkout
                 </button>
-                <Link href='/'><button className="w-full bg-blue-600 text-white py-2 rounded-md mt-20">Back</button></Link>
+                <button
+                  onClick={() => {
+                    clearCart();
+                    toast.success("Cart cleared successfully!");
+                  }}
+                  className="w-full bg-red-600 text-white py-2 rounded-md mt-4"
+                >
+                  Clear Cart
+                </button>
+                <Link href="/">
+                  <button className="w-full bg-gray-600 text-white py-2 rounded-md mt-4">
+                    Back
+                  </button>
+                </Link>
               </div>
             )}
           </div>
         </div>
       )}
-
-      {/* Mobile View */}
       {isMobile && (
         <div
           className="fixed bottom-0 w-full bg-white shadow-xl z-50"
@@ -152,18 +174,33 @@ export const Cart = () => {
               <p className="text-gray-500">Your cart is empty.</p>
             )}
             {cart.items.length > 0 && (
-              <button
-                onClick={handleCheckoutClick}
-                className="w-full bg-blue-600 text-white py-2 rounded-md"
-              >
-                Proceed to Checkout
-              </button>
+              <div>
+                <p className="text-black font-semibold mb-2">
+                  Total Quantity: {totalQuantity}
+                </p>
+                <p className="text-black font-semibold mb-4">
+                  Total Price: ${totalPrice.toFixed(2)}
+                </p>
+                <button
+                  onClick={handleCheckoutClick}
+                  className="w-full bg-blue-600 text-white py-2 rounded-md"
+                >
+                  Proceed to Checkout
+                </button>
+                <button
+                  onClick={() => {
+                    clearCart();
+                    toast.success("Cart cleared successfully!");
+                  }}
+                  className="w-full bg-red-600 text-white py-2 rounded-md mt-4"
+                >
+                  Clear Cart
+                </button>
+              </div>
             )}
           </div>
         </div>
       )}
-
-      {/* Checkout Form */}
       {isCheckoutVisible && (
         <CheckoutForm setIsCheckoutVisible={setIsCheckoutVisible} userId="user123" />
       )}

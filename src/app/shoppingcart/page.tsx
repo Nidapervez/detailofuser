@@ -6,6 +6,7 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { useCart } from "@/app/context";
 import { Cart } from "../cart"; // Ensure the Cart component is correctly imported
+import { toast } from "react-hot-toast"; // Import toast
 
 interface Product {
   _id: string;
@@ -115,15 +116,16 @@ const Page = () => {
             </div>
             {/* Add to Cart Button */}
             <button
-              onClick={() =>
+              onClick={() => {
                 add({
                   id: bag._id,
                   name: bag.name,
                   price: parseFloat(bag.price), // Ensure price is passed as a number
                   quantity: 1,
                   image: bag.image || "/placeholder.png", // Include image in cart
-                })
-              }
+                });
+                toast.success(`${bag.name} added to cart!`); // Show toast when item is added
+              }}
               className="mt-4 px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
             >
               Add to Cart
