@@ -7,7 +7,6 @@ import {
   faUser,
   faHeart,
   faShoppingCart,
-  faTachometerAlt,
   faCogs,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
@@ -22,8 +21,8 @@ const Header1 = () => {
   return (
     <header>
       {/* Top Bar */}
-      <div className="bg-purple-600 text-white text-sm py-2 px-4 flex justify-between items-center max-md:flex-col max-md:space-y-2">
-        <div className="flex space-x-6 max-md:justify-center">
+      <div className="bg-purple-600 text-white text-sm py-2 px-4 flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap space-x-4 justify-center items-center">
           <span className="flex items-center">
             <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
             mhhasanul@gmail.com
@@ -33,7 +32,7 @@ const Header1 = () => {
             (12345)67890
           </span>
         </div>
-        <div className="flex space-x-6 items-center max-md:justify-center">
+        <div className="flex flex-wrap space-x-4 justify-center items-center mt-2 md:mt-0">
           {/* Language Dropdown */}
           <div className="relative">
             <button
@@ -84,25 +83,21 @@ const Header1 = () => {
               <FontAwesomeIcon icon={faHeart} className="mr-2" /> Wishlist
             </button>
           </Link>
-         <Link href='/cart'>
-            <button className="flex items-center snipcart-checkout ">
+          <Link href="/cart">
+            <button className="flex items-center">
               <FontAwesomeIcon icon={faShoppingCart} className="mr-2" /> Cart
             </button>
           </Link>
-
-          <Link href='/dashboard'>
-  <button className="flex items-center snipcart-checkout">
-    <FontAwesomeIcon icon={faCogs} className="mr-2" /> Admin Dashboard
-  </button>
-</Link>
-
-
-<Link href='/analytics'>
-  <button className="flex items-center snipcart-checkout">
-    <FontAwesomeIcon icon={faChartLine} className="mr-2" /> Analytics
-  </button>
-</Link>
-         
+          <Link href="/dashboard">
+            <button className="flex items-center">
+              <FontAwesomeIcon icon={faCogs} className="mr-2" /> AdminDashboard
+            </button>
+          </Link>
+          <Link href="/analytics">
+            <button className="flex items-center">
+              <FontAwesomeIcon icon={faChartLine} className="mr-2" /> Analytics
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -136,25 +131,24 @@ const Header1 = () => {
 
           {/* Desktop Navigation Links */}
           <ul className="hidden md:flex space-x-8 text-gray-800 text-sm">
-            <li className="hover:text-pink-500 cursor-pointer">
+            <li className="hover:text-pink-500">
               <Link href="/">Home</Link>
             </li>
-            <Link href="/pages">
-              <li className="hover:text-pink-500 cursor-pointer">Pages</li>
-            </Link>
-            <Link href="/shoppingcart">
-              <li className="hover:text-pink-500 cursor-pointer">Shop</li>
-            </Link>
-           
-            <Link href="/blog">
-              <li className="hover:text-pink-500 cursor-pointer">Blog</li>
-            </Link>
-            <Link href="/shop">
-              <li className="hover:text-pink-500 cursor-pointer">More Products</li>
-            </Link>
-            <Link href="/contact">
-              <li className="hover:text-pink-500 cursor-pointer">Contact</li>
-            </Link>
+            <li className="hover:text-pink-500">
+              <Link href="/pages">Pages</Link>
+            </li>
+            <li className="hover:text-pink-500">
+              <Link href="/shoppingcart">Shop</Link>
+            </li>
+            <li className="hover:text-pink-500">
+              <Link href="/blog">Blog</Link>
+            </li>
+            <li className="hover:text-pink-500">
+              <Link href="/shop">More Products</Link>
+            </li>
+            <li className="hover:text-pink-500">
+              <Link href="/contact">Contact</Link>
+            </li>
           </ul>
         </div>
 
@@ -166,22 +160,31 @@ const Header1 = () => {
                 Home
               </Link>
             </li>
-            <Link href="/pages">
-              <li className="hover:text-pink-500">Pages</li>
-            </Link>
-            <Link href="/shoppingcart">
-              <li className="hover:text-pink-500 cursor-pointer">Shop</li>
-            </Link>
-           
-            <Link href="/blog">
-              <li className="hover:text-pink-500">Blog</li>
-            </Link>
-            <Link href="/shop">
-              <li className="hover:text-pink-500 cursor-pointer">More Products</li>
-            </Link>
-            <Link href="/contact">
-              <li className="hover:text-pink-500">Contact</li>
-            </Link>
+            <li>
+              <Link href="/pages" className="hover:text-pink-500">
+                Pages
+              </Link>
+            </li>
+            <li>
+              <Link href="/shoppingcart" className="hover:text-pink-500">
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="hover:text-pink-500">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop" className="hover:text-pink-500">
+                More Products
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-pink-500">
+                Contact
+              </Link>
+            </li>
           </ul>
         )}
       </nav>
