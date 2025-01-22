@@ -143,14 +143,14 @@ const Header1 = () => {
               <li className="hover:text-pink-500 cursor-pointer">Pages</li>
             </Link>
             <Link href="/shoppingcart">
-              <li className="hover:text-pink-500 cursor-pointer">Live Products</li>
+              <li className="hover:text-pink-500 cursor-pointer">Shop</li>
             </Link>
            
             <Link href="/blog">
               <li className="hover:text-pink-500 cursor-pointer">Blog</li>
             </Link>
             <Link href="/shop">
-              <li className="hover:text-pink-500 cursor-pointer">Shop</li>
+              <li className="hover:text-pink-500 cursor-pointer">More Products</li>
             </Link>
             <Link href="/contact">
               <li className="hover:text-pink-500 cursor-pointer">Contact</li>
@@ -170,14 +170,14 @@ const Header1 = () => {
               <li className="hover:text-pink-500">Pages</li>
             </Link>
             <Link href="/shoppingcart">
-              <li className="hover:text-pink-500 cursor-pointer">Live Products</li>
+              <li className="hover:text-pink-500 cursor-pointer">Shop</li>
             </Link>
            
             <Link href="/blog">
               <li className="hover:text-pink-500">Blog</li>
             </Link>
             <Link href="/shop">
-              <li className="hover:text-pink-500">Shop</li>
+              <li className="hover:text-pink-500 cursor-pointer">More Products</li>
             </Link>
             <Link href="/contact">
               <li className="hover:text-pink-500">Contact</li>

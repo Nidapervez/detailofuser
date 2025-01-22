@@ -61,13 +61,13 @@ const ProductDetailPage = async ({
         </h1>
         <div className="flex flex-col sm:flex-row gap-8">
           {/* Product Image Section */}
-          <div className="flex-1 max-w-sm mx-auto sm:max-w-lg sm:w-1/2">
+          <div className="flex-1 max-w-full mx-auto sm:max-w-lg sm:w-1/2">
             <Image
               src={product.image || "/placeholder.png"} // Handle the image URL
               alt={product.name || "Product Image"}
-              width={300}
-              height={300}
-              className="w-full h-64 object-cover rounded-md mb-4"
+              width={600} // Increased width for a larger image
+              height={600} // Increased height for a larger image
+              className="w-full h-full object-cover rounded-md mb-4"
             />
           </div>
 

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Shop from '../components/page1'
 import Accesories from '../components/accesories'
@@ -43,7 +44,15 @@ const page = () => {
     </div>
   </div>
   </div>
- <div className='mt-32 ml-20'> <Accesories/></div>
+ <div className='mt-32 ml-20'>    <h2 className="text-2xl font-bold text-violet-950">
+        Ecommerce Accessories &amp; Fashion item
+      </h2>
+      <div className="self-start mt-2 text-xs text-slate-400" aria-live="polite">
+        About 9,620 results (0.62 seconds)
+      </div>
+    </div>
+    <div className="flex flex-wrap gap-7 items-start my-auto max-md:max-w-full">
+    </div>
       
       
       
