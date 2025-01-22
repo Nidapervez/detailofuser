@@ -1,6 +1,7 @@
 import React from "react";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
+import Link from "next/link";
 
 // Define the structure of your product data
 interface Product {
@@ -45,7 +46,12 @@ const ProductDetailPage = async ({
     const product = result[0] || null; // Get the first product or null if not found
 
     if (!product) {
-      return <div>Product not found</div>;
+      return (
+        <div className="text-center text-gray-600 py-10">
+          <h2 className="text-xl font-semibold">Product not found</h2>
+          <p>Please check the product ID or try again later.</p>
+        </div>
+      );
     }
 
     return (
@@ -88,7 +94,14 @@ const ProductDetailPage = async ({
                 Sizes: {product.sizes?.join(", ")}
               </p>
 
-              {/* Snipcart Add to Cart Button */}
+              {/* Back to Shopping Cart Button */}
+              <Link href="/shoppingcart">
+                <button
+                  className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition sm:w-auto"
+                >
+                  Back to Cart
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -96,7 +109,12 @@ const ProductDetailPage = async ({
     );
   } catch (error) {
     console.error("Error fetching product details:", error);
-    return <div>Something went wrong</div>;
+    return (
+      <div className="text-center text-gray-600 py-10">
+        <h2 className="text-xl font-semibold">Something went wrong</h2>
+        <p>Please try again later.</p>
+      </div>
+    );
   }
 };
 
